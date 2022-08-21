@@ -4,3 +4,11 @@
   border: 1px solid #333;
   display: inline-block;
 }
+
+.node-start {
+  background-color: blue;
+}
+
+.node-finish {
+  background-color: red;
+}

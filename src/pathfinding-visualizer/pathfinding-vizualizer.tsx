@@ -4,8 +4,8 @@ import Node from "./node/node";
 export type CurrentNode = {
   col: number;
   row: number;
-  isStart?: boolean;
-  isFinish?: boolean;
+  isStart: boolean;
+  isFinish: boolean;
 };
 
 const PathfindingVisualizer = () => {
@@ -19,8 +19,8 @@ const PathfindingVisualizer = () => {
         const currentNode: CurrentNode = {
           col,
           row,
-          isStart: col === 10 && row === 5,
-          isFinish: col === 10 && row === 45,
+          isStart: row === 10 && col === 5,
+          isFinish: row === 10 && col === 45,
         };
 
         currentRow.push(currentNode);
@@ -35,9 +35,12 @@ const PathfindingVisualizer = () => {
       {nodes.map((row, rowIdx) => {
         return (
           <div key={rowIdx}>
-            {row.map((node, nodeIdx) => (
-              <Node key={nodeIdx} />
-            ))}
+            {row.map((node, nodeIdx) => {
+              const { isStart, isFinish } = node;
+              return (
+                <Node key={nodeIdx} isStart={isStart} isFinish={isFinish} />
+              );
+            })}
           </div>
         );
       })}
