@@ -36,7 +36,7 @@ export const dijkstra = (grid: Node[][], startNode: Node, finishNode: Node) => {
 };
 
 function getAllNodes(grid: TypeNode[][]): TypeNode[] {
-  const nodes = [];
+  const nodes: Node[] = [];
   for (const row of grid) {
     for (const node of row) {
       nodes.push(node);

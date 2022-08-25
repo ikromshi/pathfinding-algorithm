@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { TypeNode } from "../types/TS-types";
 import { dijkstra } from "../algorithms/dijkstra";
+import { TypeNode } from "../types/TS-types";
+import { useEffect, useState } from "react";
 import { Fragment } from "react";
 import Node from "./node/node";
 
@@ -33,18 +33,16 @@ const PathfindingVisualizer = () => {
         Visualize Dijkstra's Algorithm
       </button>
       <div className="grid">
-        {grid.map((row, rowIdx) => {
-          return (
-            <div key={rowIdx}>
-              {row.map((node, nodeIdx) => {
-                const { isStart, isFinish } = node;
-                return (
-                  <Node key={nodeIdx} isStart={isStart} isFinish={isFinish} />
-                );
-              })}
-            </div>
-          );
-        })}
+        {grid.map((row, rowIdx) => (
+          <div key={rowIdx}>
+            {row.map((node, nodeIdx) => {
+              const { isStart, isFinish } = node;
+              return (
+                <Node key={nodeIdx} isStart={isStart} isFinish={isFinish} />
+              );
+            })}
+          </div>
+        ))}
       </div>
     </Fragment>
   );
