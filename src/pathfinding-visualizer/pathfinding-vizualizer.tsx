@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { TypeNode } from "../types/TS-types";
+import { dijkstra } from "../algorithms/dijkstra";
 import { Fragment } from "react";
 import Node from "./node/node";
 
@@ -7,15 +9,8 @@ const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
 
-export type CurrentNode = {
-  col: number;
-  row: number;
-  isStart: boolean;
-  isFinish: boolean;
-};
-
 const PathfindingVisualizer = () => {
-  const [grid, setGrid] = useState<CurrentNode[][]>([]);
+  const [grid, setGrid] = useState<TypeNode[][]>([]);
 
   /**
    * Construct the initial grid and pass it down to the Node component ~
@@ -26,7 +21,11 @@ const PathfindingVisualizer = () => {
     setGrid(grid);
   }, []);
 
-  function visualizeDijkstra() {}
+  function visualizeDijkstra() {
+    const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+  }
 
   return (
     <Fragment>
@@ -51,10 +50,10 @@ const PathfindingVisualizer = () => {
   );
 };
 
-function getInitialGrid() {
-  const grid: CurrentNode[][] = [];
+function getInitialGrid(): TypeNode[][] {
+  const grid: TypeNode[][] = [];
   for (let row = 0; row < 20; row++) {
-    const currentRow: CurrentNode[] = [];
+    const currentRow: TypeNode[] = [];
     for (let col = 0; col < 50; col++) {
       currentRow.push(createNode(col, row));
     }
@@ -63,7 +62,7 @@ function getInitialGrid() {
   return grid;
 }
 
-function createNode(col: number, row: number) {
+function createNode(col: number, row: number): TypeNode {
   return {
     col,
     row,

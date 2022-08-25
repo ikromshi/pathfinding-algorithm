@@ -1,5 +1,4 @@
 import "./node.css";
-import { CurrentNode } from "../pathfinding-vizualizer";
 
 type NodeEnds = {
   isStart: boolean;
