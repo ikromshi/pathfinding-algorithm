@@ -13,7 +13,7 @@ const PathfindingVisualizer = () => {
   const [grid, setGrid] = useState<TypeNode[][]>([]);
 
   /**
-   * Construct the initial grid and pass it down to the Node component ~
+   * Constructs the initial grid and passes it down to the Node component ~
    * in the return block to build each individual cell;
    */
   useEffect(() => {
@@ -21,6 +21,14 @@ const PathfindingVisualizer = () => {
     setGrid(grid);
   }, []);
 
+  /**
+   * Loops through a list of nodes;
+   * Creates a copy of the existing grid;
+   * Creates a new node - setting the isVisited property to true;
+   * Replaces the new node with the old one in the new grid;
+   * Updates the state - rendering the Node component
+   * @param visitedNodesInOrder an array of nodes
+   */
   function animateDijkstra(visitedNodesInOrder: TypeNode[]) {
     for (let i = 0; i < visitedNodesInOrder.length; i++) {
       setTimeout(() => {
@@ -33,6 +41,11 @@ const PathfindingVisualizer = () => {
     }
   }
 
+  /**
+   * Creates variables for the start and end nodes;
+   * Calls the dijkstra function that spits out an array of visited nodes in order;
+   * Calls the function above to animate the individual nodes;
+   */
   function visualizeDijkstra() {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
@@ -66,6 +79,10 @@ const PathfindingVisualizer = () => {
   );
 };
 
+/**
+ * Creates an array of rows with nodes inside - objects
+ * @returns the grid with 20 rows and 50 columns
+ */
 function getInitialGrid(): TypeNode[][] {
   const grid: TypeNode[][] = [];
   for (let row = 0; row < 20; row++) {
@@ -78,6 +95,12 @@ function getInitialGrid(): TypeNode[][] {
   return grid;
 }
 
+/**
+ * Creates a node for the rows in the grid
+ * @param col 0 - 40
+ * @param row 0 - 19
+ * @returns a node (object)
+ */
 function createNode(col: number, row: number): TypeNode {
   return {
     col,
