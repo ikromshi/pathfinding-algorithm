@@ -7,20 +7,24 @@ export const dijkstra = (grid: Node[][], startNode: Node, finishNode: Node) => {
   while (!!unvisitedNodes.length) {
     sortNodesByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
-    /** Handle Walls here
-     *
-     * Handle Impossible here
-     *
-     * Animate here
-     *
-     * Handle the animation of dijkstraVisualize here>>>
-     * grid[object] -> number?
-     *
-     */
-    // closestNode.isVisited = true;
-    closestNode && visitedNodesInOrder.push(closestNode);
-    if (closestNode === finishNode) return visitedNodesInOrder;
-    closestNode && updateNeighbors(closestNode, grid);
+    if (closestNode) {
+      if (closestNode.isWall) continue; // Go around the wall;
+      if (closestNode.distance === Infinity) return visitedNodesInOrder; // Stop if no closes node;
+      /** Handle Walls here
+       *
+       * Handle Impossible here
+       *
+       * Animate here
+       *
+       * Handle the animation of dijkstraVisualize here>>>
+       * grid[object] -> number?
+       *
+       */
+      // closestNode.isVisited = true;
+      closestNode && visitedNodesInOrder.push(closestNode);
+      if (closestNode === finishNode) return visitedNodesInOrder;
+      closestNode && updateNeighbors(closestNode, grid);
+    }
   }
 };
 

@@ -54,7 +54,9 @@ const PathfindingVisualizer = () => {
         const newGrid = grid.slice();
         const newNode = { ...node, isVisited: true };
         newGrid[node.row][node.col] = newNode;
-        setGrid(newGrid); // !!! Optimize this !!!
+        document.getElementById(`node-${node.row}-${node.col}`)!.className =
+          "node node-visited";
+        // setGrid(newGrid); // !!! Optimize this !!!
       }, 25 * i);
     }
   }
