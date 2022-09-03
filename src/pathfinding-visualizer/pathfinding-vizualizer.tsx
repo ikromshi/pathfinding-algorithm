@@ -2,7 +2,7 @@ import { dijkstra } from "../algorithms/dijkstra";
 import { TypeNode } from "../types/TS-types";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
-import Node from "./node/node";
+import Grid from "../components/grid/grid";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -11,6 +11,7 @@ const FINISH_NODE_COL = 35;
 
 const PathfindingVisualizer = () => {
   const [grid, setGrid] = useState<TypeNode[][]>([]);
+  const [mouseIsPresses, setMouseIsPressed] = useState<boolean>(false);
 
   /**
    * Constructs the initial grid and passes it down to the Node component ~
@@ -20,6 +21,23 @@ const PathfindingVisualizer = () => {
     const grid = getInitialGrid();
     setGrid(grid);
   }, []);
+
+  function handleMouseDown(row: number, col: number) {
+    const node = grid[row][col];
+    const newGrid = getNewGridWithWallToggled(grid, row, col);
+    setGrid(newGrid); //!!! Optimize this !!!
+    setMouseIsPressed(true);
+  }
+
+  function handleMouseEnter(row: number, col: number) {
+    if (!mouseIsPresses) return;
+    const newGrid = getNewGridWithWallToggled(grid, row, col);
+    setGrid(newGrid);
+  }
+
+  function handleMouseUp() {
+    setMouseIsPressed(false);
+  }
 
   /**
    * Loops through a list of nodes;
@@ -36,7 +54,7 @@ const PathfindingVisualizer = () => {
         const newGrid = grid.slice();
         const newNode = { ...node, isVisited: true };
         newGrid[node.row][node.col] = newNode;
-        setGrid(newGrid);
+        setGrid(newGrid); // !!! Optimize this !!!
       }, 25 * i);
     }
   }
@@ -58,23 +76,13 @@ const PathfindingVisualizer = () => {
       <button onClick={() => visualizeDijkstra()}>
         Visualize Dijkstra's Algorithm
       </button>
-      <div className="grid">
-        {grid.map((row, rowIdx) => (
-          <div key={rowIdx}>
-            {row.map((node, nodeIdx) => {
-              const { isStart, isFinish, isVisited } = node;
-              return (
-                <Node
-                  key={nodeIdx}
-                  isStart={isStart}
-                  isFinish={isFinish}
-                  isVisited={isVisited}
-                />
-              );
-            })}
-          </div>
-        ))}
-      </div>
+      <Grid
+        grid={grid}
+        handleMouseDown={handleMouseDown}
+        handleMouseEnter={handleMouseEnter}
+        handleMouseUp={handleMouseUp}
+        mouseIsPressed={mouseIsPresses}
+      />
     </Fragment>
   );
 };
@@ -112,6 +120,18 @@ function createNode(col: number, row: number): TypeNode {
     isWall: false,
     previousNode: false,
   };
+}
+
+function getNewGridWithWallToggled(
+  grid: TypeNode[][],
+  row: number,
+  col: number
+): TypeNode[][] {
+  const newGrid = grid.slice();
+  const node = grid[row][col];
+  const newNode = { ...node, isWall: !node.isWall };
+  newGrid[row][col] = newNode;
+  return newGrid;
 }
 
 export default PathfindingVisualizer;

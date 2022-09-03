@@ -16,3 +16,7 @@
 .node-visited {
   background-color: blue;
 }
+
+.node-wall {
+  background-color: rgb(12, 53, 71);
+}
