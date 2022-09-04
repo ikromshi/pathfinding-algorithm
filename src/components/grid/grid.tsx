@@ -1,6 +1,7 @@
 import { TypeNode } from "../../types/TS-types";
 import { FC } from "react";
 import Node from "../node/node";
+import { GridStyles } from "./grid-styles";
 
 type NodeProps = {
   grid: TypeNode[][];
@@ -18,7 +19,7 @@ const Grid: FC<NodeProps> = ({
   handleMouseUp,
 }) => {
   return (
-    <div className="grid">
+    <GridStyles>
       {grid.map((row, rowIdx) => (
         <div key={rowIdx}>
           {row.map((node, nodeIdx) => {
@@ -31,7 +32,6 @@ const Grid: FC<NodeProps> = ({
                 isWall={isWall}
                 isStart={isStart}
                 isFinish={isFinish}
-                // isVisited={isVisited}
                 mouseIsPressed={mouseIsPressed}
                 handleMouseUp={handleMouseUp}
                 handleMouseDown={handleMouseDown}
@@ -41,7 +41,7 @@ const Grid: FC<NodeProps> = ({
           })}
         </div>
       ))}
-    </div>
+    </GridStyles>
   );
 };
 

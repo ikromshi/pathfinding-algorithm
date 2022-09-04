@@ -3,7 +3,6 @@ import { TypeNode } from "../types/TS-types";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
 import Grid from "../components/grid/grid";
-import { isShorthandPropertyAssignment } from "typescript";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -73,7 +72,7 @@ const PathfindingVisualizer = () => {
         const node = nodesInShortestPathOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`)!.className =
           "node node-shortest-path ";
-      }, 10 * i);
+      }, 35 * i);
     }
   }
 
