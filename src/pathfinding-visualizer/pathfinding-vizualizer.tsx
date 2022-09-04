@@ -3,6 +3,7 @@ import { TypeNode } from "../types/TS-types";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
 import Grid from "../components/grid/grid";
+import { isShorthandPropertyAssignment } from "typescript";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -47,12 +48,31 @@ const PathfindingVisualizer = () => {
    * Gives the new node a
    * @param visitedNodesInOrder an array of nodes
    */
-  function animateDijkstra(visitedNodesInOrder: TypeNode[]) {
-    for (let i = 0; i < visitedNodesInOrder.length; i++) {
+  function animateDijkstra(
+    visitedNodesInOrder: TypeNode[],
+    nodesInShortestPathOrder: TypeNode[]
+  ) {
+    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length) {
+        setTimeout(() => {
+          animateShortestPath(nodesInShortestPathOrder);
+        }, 10 * i);
+        return;
+      }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`)!.className =
           "node node-visited";
+      }, 10 * i);
+    }
+  }
+
+  function animateShortestPath(nodesInShortestPathOrder: TypeNode[]) {
+    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+      setTimeout(() => {
+        const node = nodesInShortestPathOrder[i];
+        document.getElementById(`node-${node.row}-${node.col}`)!.className =
+          "node node-shortest-path ";
       }, 10 * i);
     }
   }
@@ -67,8 +87,8 @@ const PathfindingVisualizer = () => {
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    console.log(nodesInShortestPathOrder);
-    visitedNodesInOrder && animateDijkstra(visitedNodesInOrder);
+    visitedNodesInOrder &&
+      animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
   return (
