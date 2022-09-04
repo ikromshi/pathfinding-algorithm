@@ -26,9 +26,7 @@ const Node = ({
     ? "node-start"
     : isFinish
     ? "node-finish"
-    : // : isVisited
-    // ? "node-visited"
-    isWall
+    : isWall
     ? "node-wall"
     : "";
 

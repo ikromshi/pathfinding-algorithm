@@ -2,9 +2,9 @@ export type TypeNode = {
   row: number;
   col: number;
   distance: number;
-  isVisited: boolean;
+  isWall: boolean;
   isStart: boolean;
   isFinish: boolean;
-  isWall: boolean;
+  isVisited: boolean;
   previousNode: TypeNode | null;
 };

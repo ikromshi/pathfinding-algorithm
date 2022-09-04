@@ -1,8 +1,8 @@
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
 import { TypeNode } from "../types/TS-types";
 import { useEffect, useState } from "react";
-import { Fragment } from "react";
 import Grid from "../components/grid/grid";
+import { Fragment } from "react";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;

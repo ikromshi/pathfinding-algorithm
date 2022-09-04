@@ -1,7 +1,7 @@
 import { TypeNode } from "../../types/TS-types";
-import { FC } from "react";
-import Node from "../node/node";
 import { GridStyles } from "./grid-styles";
+import Node from "../node/node";
+import { FC } from "react";
 
 type NodeProps = {
   grid: TypeNode[][];

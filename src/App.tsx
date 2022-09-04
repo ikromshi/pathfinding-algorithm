@@ -1,11 +1,11 @@
-import "./App.css";
 import PathfindingVisualizer from "./pathfinding-visualizer/pathfinding-vizualizer";
+import { AppStyles } from "./App-styles";
 
 function App() {
   return (
-    <div className="App">
+    <AppStyles>
       <PathfindingVisualizer />
-    </div>
+    </AppStyles>
   );
 }
 
