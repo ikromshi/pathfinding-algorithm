@@ -1,4 +1,4 @@
-import { dijkstra } from "../algorithms/dijkstra";
+import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
 import { TypeNode } from "../types/TS-types";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
@@ -44,20 +44,16 @@ const PathfindingVisualizer = () => {
    * Creates a copy of the existing grid;
    * Creates a new node - setting the isVisited property to true;
    * Replaces the new node with the old one in the new grid;
-   * Updates the state - rendering the Node component
+   * Gives the new node a
    * @param visitedNodesInOrder an array of nodes
    */
   function animateDijkstra(visitedNodesInOrder: TypeNode[]) {
     for (let i = 0; i < visitedNodesInOrder.length; i++) {
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
-        const newGrid = grid.slice();
-        const newNode = { ...node, isVisited: true };
-        newGrid[node.row][node.col] = newNode;
         document.getElementById(`node-${node.row}-${node.col}`)!.className =
           "node node-visited";
-        // setGrid(newGrid); // !!! Optimize this !!!
-      }, 25 * i);
+      }, 10 * i);
     }
   }
 
@@ -70,6 +66,8 @@ const PathfindingVisualizer = () => {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    console.log(nodesInShortestPathOrder);
     visitedNodesInOrder && animateDijkstra(visitedNodesInOrder);
   }
 
@@ -120,7 +118,7 @@ function createNode(col: number, row: number): TypeNode {
     distance: Infinity,
     isVisited: false,
     isWall: false,
-    previousNode: false,
+    previousNode: null,
   };
 }
 

@@ -9,21 +9,11 @@ export const dijkstra = (grid: Node[][], startNode: Node, finishNode: Node) => {
     const closestNode = unvisitedNodes.shift();
     if (closestNode) {
       if (closestNode.isWall) continue; // Go around the wall;
-      if (closestNode.distance === Infinity) return visitedNodesInOrder; // Stop if no closes node;
-      /** Handle Walls here
-       *
-       * Handle Impossible here
-       *
-       * Animate here
-       *
-       * Handle the animation of dijkstraVisualize here>>>
-       * grid[object] -> number?
-       *
-       */
-      // closestNode.isVisited = true;
-      closestNode && visitedNodesInOrder.push(closestNode);
+      if (closestNode.distance === Infinity) return visitedNodesInOrder; // Stop if no closest node;
+      closestNode.isVisited = true;
+      visitedNodesInOrder.push(closestNode);
       if (closestNode === finishNode) return visitedNodesInOrder;
-      closestNode && updateNeighbors(closestNode, grid);
+      updateUnvisitedNeighbors(closestNode, grid);
     }
   }
 };
@@ -56,15 +46,16 @@ function sortNodesByDistance(unvisitedNodes: Node[]) {
 /**
  * !! >> Look at the bottom of the page to get better insight into the change structure:
  * This function:
- * Creates a var neighbors - nodes[] -  by calling updateNeighbors() ~ see below;
+ * Creates a var neighbors - nodes[] -  by calling updateUnvisitedNeighbors() ~ see below;
  * Changes each neighbor's distance to "current_node.distance + 1";
  * @param node closestNode identified by sortNodesByDistance();
  * @param grid rows[] -> nodes[]
  */
-function updateNeighbors(node: Node, grid: Node[][]) {
-  const neighbors: Node[] = getNeighbors(node, grid);
-  for (const neighbor of neighbors) {
+function updateUnvisitedNeighbors(node: Node, grid: Node[][]) {
+  const unvisitedNeighbors: Node[] = getUnvisitedNeighbors(node, grid);
+  for (const neighbor of unvisitedNeighbors) {
     neighbor.distance = node.distance + 1;
+    neighbor.previousNode = node;
   }
 }
 
@@ -75,21 +66,32 @@ function updateNeighbors(node: Node, grid: Node[][]) {
  * @param grid rows[] -> nodes[]
  * @returns neighbors: nodes[]
  */
-function getNeighbors(node: Node, grid: Node[][]) {
+function getUnvisitedNeighbors(node: Node, grid: Node[][]) {
   const neighbors = [];
   const { col, row } = node;
   if (row > 0) neighbors.push(grid[row - 1][col]);
   if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
   if (col > 0) neighbors.push(grid[row][col - 1]);
   if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
-  return neighbors;
+  return neighbors.filter((neighbor) => !neighbor.isVisited);
+}
+
+export function getNodesInShortestPathOrder(finishNode: TypeNode) {
+  const nodesInShortestPathOrder = [];
+  let currentNode = finishNode;
+  while (currentNode.previousNode) {
+    nodesInShortestPathOrder.unshift(currentNode);
+    currentNode = currentNode.previousNode;
+    console.log(nodesInShortestPathOrder);
+  }
+  return nodesInShortestPathOrder;
 }
 
 /**
  * >>> The change structure for the nodes' distance:::
- * 1) updateNeighbors() => We take the original grid and pass it down to getNeighbors();
- * 2) getNeighbors() => We gets the first nodes in 4 directions and appends it to a new array;
- * 3) updateNeighbors() => Once the array of neighbor nodes is returned, we change each node's distance to "currNode.dist+1";
+ * 1) updateUnvisitedNeighbors() => We take the original grid and pass it down to getUnvisitedNeighbors();
+ * 2) getUnvisitedNeighbors() => We gets the first nodes in 4 directions and appends it to a new array;
+ * 3) updateUnvisitedNeighbors() => Once the array of neighbor nodes is returned, we change each node's distance to "currNode.dist+1";
  * !! This change, which happens inside a completely different array, is reflected in the original 2D "grids" array;
  * !! This, in turn, is reflected inside the node objects of unvisitedNeighbors + visitedNeighbors arrays;
  */

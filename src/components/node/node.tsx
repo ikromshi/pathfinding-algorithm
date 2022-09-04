@@ -5,7 +5,7 @@ type NodeEnds = {
   handleMouseDown: (row: number, col: number) => void;
   handleMouseUp: () => void;
   mouseIsPressed: boolean;
-  isVisited: boolean;
+  // isVisited: boolean;
   isFinish: boolean;
   isStart: boolean;
   isWall: boolean;
@@ -17,7 +17,7 @@ const Node = ({
   isWall,
   isStart,
   isFinish,
-  isVisited,
+  // isVisited,
   row,
   col,
   handleMouseDown,
@@ -28,9 +28,9 @@ const Node = ({
     ? "node-start"
     : isFinish
     ? "node-finish"
-    : isVisited
-    ? "node-visited"
-    : isWall
+    : // : isVisited
+    // ? "node-visited"
+    isWall
     ? "node-wall"
     : "";
 

@@ -6,5 +6,5 @@ export type TypeNode = {
   isStart: boolean;
   isFinish: boolean;
   isWall: boolean;
-  previousNode: boolean;
+  previousNode: TypeNode | null;
 };
