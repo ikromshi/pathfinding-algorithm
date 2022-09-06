@@ -1,7 +1,7 @@
 import { TypeNode } from "../../types/TS-types";
 import { GridStyles } from "./grid-styles";
 import Node from "../node/node";
-import { FC } from "react";
+import { FC, Fragment } from "react";
 
 type NodeProps = {
   grid: TypeNode[][];
@@ -21,7 +21,8 @@ const Grid: FC<NodeProps> = ({
   return (
     <GridStyles>
       {grid.map((row, rowIdx) => (
-        <div key={rowIdx}>
+        // <div key={rowIdx}>
+        <Fragment key={rowIdx}>
           {row.map((node, nodeIdx) => {
             const { row, col, isWall, isStart, isFinish, isVisited } = node;
             return (
@@ -39,7 +40,8 @@ const Grid: FC<NodeProps> = ({
               />
             );
           })}
-        </div>
+          {/* </div> */}
+        </Fragment>
       ))}
     </GridStyles>
   );

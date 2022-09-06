@@ -1,4 +1,4 @@
-import "./node.css";
+import "./node.css"; // <- get rid of this; use styled components......
 
 type NodeEnds = {
   handleMouseEnter: (row: number, col: number) => void;

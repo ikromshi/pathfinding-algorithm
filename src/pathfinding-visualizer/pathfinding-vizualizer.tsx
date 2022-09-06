@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Grid from "../components/grid/grid";
 import { Fragment } from "react";
 
-const START_NODE_ROW = 10;
+const START_NODE_ROW = 12;
 const START_NODE_COL = 15;
-const FINISH_NODE_ROW = 10;
+const FINISH_NODE_ROW = 12;
 const FINISH_NODE_COL = 35;
 
 const PathfindingVisualizer = () => {
@@ -92,9 +92,11 @@ const PathfindingVisualizer = () => {
 
   return (
     <Fragment>
-      <button onClick={() => visualizeDijkstra()}>
-        Visualize Dijkstra's Algorithm
-      </button>
+      <div>
+        <button onClick={() => visualizeDijkstra()}>
+          Visualize Dijkstra's Algorithm
+        </button>
+      </div>
       <Grid
         grid={grid}
         handleMouseDown={handleMouseDown}
@@ -112,7 +114,7 @@ const PathfindingVisualizer = () => {
  */
 function getInitialGrid(): TypeNode[][] {
   const grid: TypeNode[][] = [];
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < 24; row++) {
     const currentRow: TypeNode[] = [];
     for (let col = 0; col < 50; col++) {
       currentRow.push(createNode(col, row));
