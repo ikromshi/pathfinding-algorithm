@@ -7,11 +7,11 @@
 }
 
 .node-start {
-  background-color: green;
+  background-color: #92e9b7;
 }
 
 .node-finish {
-  background-color: red;
+  background-color: #e470a6;
 }
 
 .node-wall {

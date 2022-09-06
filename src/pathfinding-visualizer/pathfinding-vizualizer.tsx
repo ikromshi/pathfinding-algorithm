@@ -22,19 +22,39 @@ const PathfindingVisualizer = () => {
     setGrid(grid);
   }, []);
 
+  /**
+   * This function:
+   * Is responsible for turning nodes into walls (and vise versa) when the user clicks on them;
+   * It receives the location of a node gets the "isWall" property toggled;;
+   * Updates the state with a new grid and a "true" value for "mouseIsPressed";
+   * @param row
+   * @param col
+   */
   function handleMouseDown(row: number, col: number) {
-    const node = grid[row][col];
     const newGrid = getNewGridWithWallToggled(grid, row, col);
-    setGrid(newGrid); //!!! Optimize this !!!
+    setGrid(newGrid);
     setMouseIsPressed(true);
   }
 
+  /**
+   * This function:
+   * Is responsible for turning nodes into walls (and vice versa) when user clicks and drags the mouse across the grid;
+   * It takes the location of a node and gets the "isWall" property toggled;
+   * Updates the state with a new grid
+   * @param row
+   * @param col
+   * @returns
+   */
   function handleMouseEnter(row: number, col: number) {
     if (!mouseIsPresses) return;
     const newGrid = getNewGridWithWallToggled(grid, row, col);
-    setGrid(newGrid);
+    setGrid(newGrid); //!!! Maybe optimize this ????
   }
 
+  /**
+   * This function:
+   * Updates the state with a "false" value for "mouseIsPressed";
+   */
   function handleMouseUp() {
     setMouseIsPressed(false);
   }
@@ -55,24 +75,30 @@ const PathfindingVisualizer = () => {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
+        }, 5 * i);
         return;
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`)!.className =
-          "node node-visited";
-      }, 10 * i);
+          "node node-visited"; // USE REACT REF HERE;
+      }, 5 * i);
     }
   }
 
+  /**
+   * This function:
+   * Is responsible for animating the shortest path once the dijkstra animation is complete;
+   * It updates the class names of all the nodes in the shortest path, which will trigger node.css to change their color to a shade of yellow;
+   * @param nodesInShortestPathOrder
+   */
   function animateShortestPath(nodesInShortestPathOrder: TypeNode[]) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`)!.className =
-          "node node-shortest-path ";
-      }, 35 * i);
+          "node node-shortest-path "; // USE REACT REF HERE;
+      }, 70 * i); // adjust the speed depending on the length of the shortest path!!
     }
   }
 
@@ -141,6 +167,17 @@ function createNode(col: number, row: number): TypeNode {
   };
 }
 
+/**
+ * This function:
+ * Creates a new variable for the grid copy;
+ * Accesses a specific node and toggles the "isWall" property;
+ * Puts the node and the remaining nodes into the new grid variable;
+ * Returns the new grid variable;
+ * @param grid
+ * @param row
+ * @param col
+ * @returns
+ */
 function getNewGridWithWallToggled(
   grid: TypeNode[][],
   row: number,
