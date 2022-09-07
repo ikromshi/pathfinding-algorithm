@@ -1,4 +1,5 @@
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
+import Button from "./pathfinding-visalizer.styles";
 import { TypeNode } from "../types/TS-types";
 import { useEffect, useState } from "react";
 import Grid from "../components/grid/grid";
@@ -119,9 +120,9 @@ const PathfindingVisualizer = () => {
 
   return (
     <Fragment>
-      <button onClick={() => visualizeDijkstra()}>
+      <Button onClick={() => visualizeDijkstra()}>
         Visualize Dijkstra's Algorithm
-      </button>
+      </Button>
       <Grid
         grid={grid}
         handleMouseDown={handleMouseDown}
