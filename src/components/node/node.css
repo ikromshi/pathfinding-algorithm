@@ -1,8 +1,5 @@
 .node {
-  /* width: 1rem; */
-  /* height: 1rem; */
-  /* border: 1px solid rgb(12, 53, 71); */
-  outline: 1px solid #B6C2D9;
+  border: 1px solid #797c76;
   display: inline-block;
 }
 
@@ -15,7 +12,7 @@
 }
 
 .node-wall {
-  background-color: #457B9D;
+  background-color: #2D82B7;
 }
 
 .node-visited {
@@ -47,7 +44,7 @@
 
   100% {
     transform: scale(1);
-    background-color: rgba(0, 190, 218, 0.75);
+    background-color: rgba(135, 131, 209, 0.75);
   }
 }
 
@@ -65,16 +62,16 @@
 @keyframes shortestPath {
   0% {
     transform: scale(0.6);
-    background-color: rgb(255, 254, 106);
+    background-color: #42E2B8;
   }
 
   50% {
     transform: scale(1.2);
-    background-color: rgb(255, 254, 106);
+    background-color: #42E2B8;
   }
 
   100% {
     transform: scale(1);
-    background-color: rgb(255, 254, 106);
+    background-color: #42E2B8;
   }
 }

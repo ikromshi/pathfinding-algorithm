@@ -1,11 +1,13 @@
 import PathfindingVisualizer from "./pathfinding-visualizer/pathfinding-vizualizer";
-import { AppStyles } from "./App-styles";
+import { GlobalStyle } from "./App-styles";
+import { Fragment } from "react";
 
 function App() {
   return (
-    <AppStyles>
+    <Fragment>
+      <GlobalStyle />
       <PathfindingVisualizer />
-    </AppStyles>
+    </Fragment>
   );
 }
 
