@@ -3,13 +3,14 @@ import { TypeNode as Node, TypeNode } from "../types/TS-types";
 export const dijkstra = (grid: Node[][], startNode: Node, finishNode: Node) => {
   const visitedNodesInOrder: Node[] = [];
   startNode.distance = 0; // The distance to the start node is zero;
-  const unvisitedNodes: Node[] = getAllNodes(grid); // Spits out an array of nodes
+  const unvisitedNodes: Node[] = getAllNodes(grid); // Getting an array of all nodes;
+  console.log(unvisitedNodes);
   while (!!unvisitedNodes.length) {
     sortNodesByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
     if (closestNode) {
-      if (closestNode.isWall) continue; // Go around the wall;
-      if (closestNode.distance === Infinity) return visitedNodesInOrder; // Stop if no closest node;
+      if (closestNode.isWall) continue; // Skip the loop if the closest node is a wall;
+      if (closestNode.distance === Infinity) return visitedNodesInOrder; // If all the closest nodes are walls, stop the loop (animation);
       closestNode.isVisited = true;
       visitedNodesInOrder.push(closestNode);
       if (closestNode === finishNode) return visitedNodesInOrder;
@@ -76,13 +77,19 @@ function getUnvisitedNeighbors(node: Node, grid: Node[][]) {
   return neighbors.filter((neighbor) => !neighbor.isVisited);
 }
 
+/**
+ * This function:
+ * Makes use of the "previousNode" property in node objects to trace the shortest path back to the start node;
+ * It constructs an array of nodes in the shortest path going from the start node to the end node;
+ * @param finishNode
+ * @returns nodes in the shortest path;
+ */
 export function getNodesInShortestPathOrder(finishNode: TypeNode) {
   const nodesInShortestPathOrder = [];
   let currentNode = finishNode;
   while (currentNode.previousNode) {
     nodesInShortestPathOrder.unshift(currentNode);
     currentNode = currentNode.previousNode;
-    console.log(nodesInShortestPathOrder);
   }
   return nodesInShortestPathOrder;
 }

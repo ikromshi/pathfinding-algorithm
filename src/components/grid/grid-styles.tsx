@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const GridStyles = styled.div`
+minor-additions
   min-height: 75vh;
   min-width: 60vw;
-  margin: 100px 1rem;
-  // padding: 10px;
+  margin: 3rem 1rem;
 
   display: grid;
   grid-template-columns: repeat(50, 1fr);

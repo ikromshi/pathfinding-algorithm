@@ -24,7 +24,7 @@ const Grid: FC<NodeProps> = ({
         // <div key={rowIdx}>
         <Fragment key={rowIdx}>
           {row.map((node, nodeIdx) => {
-            const { row, col, isWall, isStart, isFinish, isVisited } = node;
+            const { row, col, isWall, isStart, isFinish } = node;
             return (
               <Node
                 key={nodeIdx}
