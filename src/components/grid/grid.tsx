@@ -23,7 +23,7 @@ const Grid: FC<NodeProps> = ({
       {grid.map((row, rowIdx) => (
         <div key={rowIdx}>
           {row.map((node, nodeIdx) => {
-            const { row, col, isWall, isStart, isFinish, isVisited } = node;
+            const { row, col, isWall, isStart, isFinish } = node;
             return (
               <Node
                 key={nodeIdx}
