@@ -8,6 +8,8 @@ This is the most fun project I've worked on so far. It uses [Dijkstra's Algorith
 
 If you're interested in the implementation of the algorithm, then you'll be glad to know that I did my best to comment all the code I've written as well as explain what role each piece is playing.
 
+The project is still in its first version, so I'm going to make more improvements every now and then.
+
 I really enjoyed building this project and look forward to adding more algorithms to the collection. Here's the [link to the website](https://pathfinding-algorithm-ikk.netlify.app/). Enjoy!
 
 ## Available Scripts
