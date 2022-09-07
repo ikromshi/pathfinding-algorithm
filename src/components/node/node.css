@@ -1,8 +1,8 @@
 .node {
-  width: 25px;
-  height: 25px;
-  border: 1px solid #333;
-  outline: 1px solid rgb(175, 216, 248);
+  /* width: 1rem; */
+  /* height: 1rem; */
+  /* border: 1px solid rgb(12, 53, 71); */
+  outline: 1px solid #B6C2D9;
   display: inline-block;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .node-wall {
-  background-color: rgb(12, 53, 71);
+  background-color: #457B9D;
 }
 
 .node-visited {

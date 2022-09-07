@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 export const GridStyles = styled.div`
-  margin-top: 3rem;
+minor-additions
+  min-height: 75vh;
+  min-width: 60vw;
+  margin: 3rem 1rem;
+
   display: grid;
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: repeat(50, 1fr);
+  grid-auto-rows: minmax(1fr, auto);
 `;
