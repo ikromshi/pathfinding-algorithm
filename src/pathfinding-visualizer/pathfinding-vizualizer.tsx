@@ -93,12 +93,13 @@ const PathfindingVisualizer = () => {
    * @param nodesInShortestPathOrder
    */
   function animateShortestPath(nodesInShortestPathOrder: TypeNode[]) {
+    let animationSpeed = nodesInShortestPathOrder.length > 40 ? 30 : 75;
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`)!.className =
           "node node-shortest-path "; // USE REACT REF HERE;
-      }, 70 * i); // adjust the speed depending on the length of the shortest path!!
+      }, animationSpeed * i);
     }
   }
 
