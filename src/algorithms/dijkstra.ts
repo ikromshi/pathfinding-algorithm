@@ -4,7 +4,6 @@ export const dijkstra = (grid: Node[][], startNode: Node, finishNode: Node) => {
   const visitedNodesInOrder: Node[] = [];
   startNode.distance = 0; // The distance to the start node is zero;
   const unvisitedNodes: Node[] = getAllNodes(grid); // Getting an array of all nodes;
-  console.log(unvisitedNodes);
   while (!!unvisitedNodes.length) {
     sortNodesByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
