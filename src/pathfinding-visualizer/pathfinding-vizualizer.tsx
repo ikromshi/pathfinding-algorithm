@@ -4,6 +4,7 @@ import { TypeNode } from "../types/TS-types";
 import { useEffect, useState } from "react";
 import Grid from "../components/grid/grid";
 import { Fragment } from "react";
+import { nodeModuleNameResolver } from "typescript";
 
 const START_NODE_ROW = 12;
 const START_NODE_COL = 15;
@@ -32,9 +33,15 @@ const PathfindingVisualizer = () => {
    * @param col
    */
   function handleMouseDown(row: number, col: number) {
-    const newGrid = getNewGridWithWallToggled(grid, row, col);
-    setGrid(newGrid);
-    setMouseIsPressed(true);
+    if (row === START_NODE_ROW && col === START_NODE_COL) {
+      return;
+    } else if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) {
+      return;
+    } else {
+      const newGrid = getNewGridWithWallToggled(grid, row, col);
+      setGrid(newGrid);
+      setMouseIsPressed(true);
+    }
   }
 
   /**
