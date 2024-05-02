@@ -10,4 +10,4 @@ If you're interested in the implementation of the algorithm, then you'll be glad
 
 The project is still in its first version, so I'm going to make more improvements every now and then.
 
-I really enjoyed building this project and look forward to adding more algorithms to the collection. Here's the [link to the website](https://pathfinding-algorithm-ikk.netlify.app/). Enjoy!
+I really enjoyed building this project and look forward to adding more algorithms to the collection. Here's the [link to the website](https://path-finder.ikromshi.com/). Enjoy!
